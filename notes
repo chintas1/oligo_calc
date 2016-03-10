@@ -1,0 +1,46 @@
+//DNA sequence being used
+ATGAGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCTGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAA
+
+// AA sequence being used
+MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFGYGVQCFARYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK
+
+//Questions:
+1. How to calculate fragment size? (can fragments be uneven in length)
+
+2. %'s (is (targets in fragment/targets in whole seq) the correct equation or are we 
+   comparing target aa's in fragment to total aa's in sequence)?
+
+3. Got following %'s using example talked about and testing with sequence above:
+
+    E [(0, 1), (3, 5)]{⟨0, 1, 2⟩, ⟨0, 3⟩} Delta = 15%
+    
+  31.25% in section [0,1], 0% in section [2], 43.75% in section [3..5],
+  25.0% in section [6..9] (notes say to consider this as 10%)
+
+  Design would produce 10%, 25%, 40%, 55%, 70%, 85% (matches initial inputs)
+
+  - Why is last section considered 10% even though it contains 25%? (Do we manually reduce it to 10%?)
+  - Design is always split into 4 sections with 2 sections having frequencies varied?
+
+4. Modifying %'s
+  - How to reduce percent to 0 delta when there are targets is overlap
+  - % rounding buffer
+    - go as close to % without exceeding
+    - minimize % difference from target %
+  - How to increase % if % is less than target even after replacing all variants with target aa?
+    - Replace non variant with target aa?
+
+5. Unique Overlap's
+    - Do all overlaps in an oligo or cooresponding overlaps between oligo's have to be unique?
+
+6. Can I assume the following inputs are given?
+    - DNA Seq
+    - Target Amino Acid (Codon)
+    - Design (deltas and fragments) in following format [(0, 1), (3, 5)] {⟨0, 1, 2⟩, ⟨0, 3⟩}
+    - # of Fragments 
+    - Fragment Size (in aas)
+    - Overlap Size (in aas)
+    - Delta
+
+7. Is correct output going to be x dna sequences where x is number of possible
+   frequency combinations from design?
